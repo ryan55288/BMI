@@ -1,0 +1,32 @@
+.btn2 {
+    margin-top: 20px;
+    height: 100px;
+    width: 100px;
+    font-weight: bold;
+    margin-left: 30px;
+}
+.btn3 {
+    height: 100px;
+    width: 100px;
+    font-weight: bold;
+    border: 5px solid #bebebe;
+    margin-left: 30px;
+    position: relative;
+}
+.img1 {
+    margin-left: 20px;
+    background: #ffd366;
+    border-radius: 10% 10%;
+    width: 80px;
+}
+.form-control-mm {
+    width: 130px;
+}
+.icome {
+    border-radius: 25px;
+    color: white;
+    &:hover {
+        box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.5), 0 17px 50px 0 rgba(0, 0, 0, 0.5);
+    }
+}
+
