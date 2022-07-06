@@ -1,13 +1,14 @@
+var data = JSON.parse(localStorage.getItem("tbody")) || [];
 var send = document.querySelector(".btn2");
 send.addEventListener("click", BMI, false);
-var data = JSON.parse(localStorage.getItem("listData")) || [];
-var listTh = document.querySelector(".th");
 
+var listTh = document.querySelector(".th");
+var result = document.getElementById(".result");
+var arr = [];
+var tbody = document.querySelector(".tbody");
+tbody.addEventListener("click", toggleDone);
 
 // updateList(data);
-function cleantext() {
-    document.querySelector(".btn3").value = "";
-}
 
 function bluecolor() {
     var btn3 = document.querySelector(".btn3");
@@ -39,53 +40,86 @@ function updateList(items) {
     str = "";
     var len = items.length;
     for (var i = 0; len > i; i++) {
-        str += '<tr><a href="#" data-index=' + i + " />刪除</a> <div>" + items[i].cm + items[i].weight + items.time + "</div></tr>";
+        let ligth = "";
+        let normal = "";
+        if (arr[i].bmiALL < 18.5) {
+            ligth = "bg-primary text-white";
+        } else if (18.5 < arr[i].bmiALL && arr[i].bmiALL < 24) {
+            normal = "bg-success text-white";
+        } else if (24 <=  arr[i].bmiALL &&  arr[i].bmiALL < 27) {
+            normal = "bg-danger text-white";
+        } else if (27 <=  arr[i].bmiALL &&  arr[i].bmiALL < 30) {
+            normal = "bg-danger text-white";
+        } else if (30 <=  arr[i].bmiALL &&  arr[i].bmiALL < 30) {
+            normal = "bg-danger text-white";
+        }
+
+        str += `<tr class="${ligth} ${normal}">
+        <td><a href="#" data-index="${i}" class="text-white">刪除</a> </td>
+        <td>${arr[i].time}</td>
+        <td>${arr[i].bmiALL}</td>
+        <td>${arr[i].statusALL}</td>        
+        </tr>`;
     }
-    th.innerHTML = str;
+    tbody.innerHTML = str;
 }
+
+function toggleDone(e) {
+    e.preventDefault();
+    if (e.target.nodeName !== "A") {
+        return;
+    }
+    var index = e.target.dataset.index;
+    arr.splice(index, 1);
+    localStorage.setItem("tbody", JSON.stringify(arr));
+    updateList(arr);
+}
+
 function BMI() {
     var cmStr = document.querySelector(".cm").value;
     var weightStr = document.querySelector(".weight").value;
-    var dataStr = document.querySelector(".data").value;
+    var time = document.querySelector(".data").value;
+    var bmi = document.querySelector(".totalId");
+    var allstatus = document.querySelector(".btn3");
 
     var Arraccount = {
-        cm: cmStr,
-        weight: weightStr,
-        time: dataStr,
+        time: "",
+        bmiALL: "",
+        statusALL: "",
     };
 
-    console.log(Arraccount); //測試
+    console.log(time.value);
+    Arraccount.time = time;
 
-    Arraccount.time = dataStr;
-    Arraccount.cm = ((cmStr / 100) * cmStr) / 100;
-    Arraccount.weight = weightStr;
-
-    var count = Arraccount.weight / Arraccount.cm;
+    var cmform = cmStr / 100;
+    var count = weightStr / (cmform * cmform);
     var allcount = Math.floor(count);
-
- 
-    data.push(Arraccount);
-    localStorage.setItem("listData", JSON.stringify(data));
+    Arraccount.bmiALL = allcount;
+    bmi.value = allcount;
 
     if (allcount < 18.5) {
-        cleantext();
         bluecolor();
-        document.querySelector(".btn3").value = "過輕";
+        allstatus.value = "過輕";
     } else if (18.5 < allcount && allcount < 24) {
-        cleantext();
         greencolor();
-        document.querySelector(".btn3").value = "正常";
+        allstatus.value = "正常";
     } else if (24 <= allcount && allcount < 27) {
-        cleantext();
         redcolor1();
-        document.querySelector(".btn3").value = "輕度肥胖";
+        allstatus.value = "輕度肥胖";
     } else if (27 <= allcount && allcount < 30) {
-        cleantext();
         redcolor2();
-        document.querySelector(".btn3").value = "中度肥胖";
+        allstatus.value = "中度肥胖";
     } else if (30 <= allcount && allcount < 35) {
-        cleantext();
         redcolor3();
-        document.querySelector(".btn3").value = " 重度肥胖";
+        allstatus.value = "重度肥胖";
     }
+
+    Arraccount.statusALL = allstatus.value;
+
+    console.log(bmi.value);
+    console.log(allstatus.value);
+    console.log(Arraccount); //測試
+    arr.push(Arraccount);
+    console.log(arr);
+    updateList(arr);
 }
