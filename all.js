@@ -13,7 +13,7 @@ tbody.addEventListener("click", toggleDone);
 function bluecolor() {
     var btn3 = document.querySelector(".btn3");
     btn3.style.color = "#2894FF";
-    btn3.style.border = " 8px solid";
+    btn3.style.border = "8px solid";
 }
 function greencolor() {
     var btn3 = document.querySelector(".btn3");
@@ -46,11 +46,11 @@ function updateList(items) {
             ligth = "bg-primary text-white";
         } else if (18.5 < arr[i].bmiALL && arr[i].bmiALL < 24) {
             normal = "bg-success text-white";
-        } else if (24 <=  arr[i].bmiALL &&  arr[i].bmiALL < 27) {
+        } else if (24 <= arr[i].bmiALL && arr[i].bmiALL < 27) {
             normal = "bg-danger text-white";
-        } else if (27 <=  arr[i].bmiALL &&  arr[i].bmiALL < 30) {
+        } else if (27 <= arr[i].bmiALL && arr[i].bmiALL < 30) {
             normal = "bg-danger text-white";
-        } else if (30 <=  arr[i].bmiALL &&  arr[i].bmiALL < 30) {
+        } else if (30 <= arr[i].bmiALL && arr[i].bmiALL < 30) {
             normal = "bg-danger text-white";
         }
 
