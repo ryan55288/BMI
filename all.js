@@ -63,7 +63,6 @@ function updateList(items) {
     }
     tbody.innerHTML = str;
 }
-
 function toggleDone(e) {
     e.preventDefault();
     if (e.target.nodeName !== "A") {
@@ -74,7 +73,6 @@ function toggleDone(e) {
     localStorage.setItem("tbody", JSON.stringify(arr));
     updateList(arr);
 }
-
 function BMI() {
     var cmStr = document.querySelector(".cm").value;
     var weightStr = document.querySelector(".weight").value;
@@ -82,6 +80,19 @@ function BMI() {
     var bmi = document.querySelector(".totalId");
     var allstatus = document.querySelector(".btn3");
 
+    if (document.querySelector(".data").value == "") {
+        alert("輸入日期不可為空");
+        return;
+    } else if (document.querySelector(".weight").value == "" && document.querySelector(".cm").value == "") {
+        alert("輸入身高，體重不可為空");
+        return;
+    } else if (document.querySelector(".cm").value == "") {
+        alert("輸入身高不可為空");
+        return;
+    } else if (document.querySelector(".weight").value == "") {
+        alert("輸入體重不可為空");
+        return;
+    }
     var Arraccount = {
         time: "",
         bmiALL: "",
@@ -123,3 +134,5 @@ function BMI() {
     console.log(arr);
     updateList(arr);
 }
+
+function op() {}
