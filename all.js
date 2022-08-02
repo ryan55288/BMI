@@ -1,10 +1,9 @@
-var HistoryArr = JSON.parse(localStorage.getItem("tbody")) || [];
+var arr = JSON.parse(localStorage.getItem("tbody")) || [];
 var send = document.querySelector(".btn2");
 send.addEventListener("click", BMI, false);
 
 var listTh = document.querySelector(".th");
 var result = document.getElementById(".result");
-var arr = [];
 var tbody = document.querySelector(".tbody");
 tbody.addEventListener("click", toggleDone);
 
@@ -72,7 +71,7 @@ function toggleDone(e) {
     }
     var index = e.target.dataset.index;
     arr.splice(index, 1);
-    localStorage.setItem("tbody", JSON.stringify(HistoryArr));
+    localStorage.setItem("tbody", JSON.stringify(arr));
     updateList(arr);
 }
 function BMI() {
@@ -135,7 +134,5 @@ function BMI() {
     arr.push(Arraccount);
     console.log(arr);
     updateList(arr);
-    localStorage.setItem("tbody", JSON.stringify(HistoryArr));
+    localStorage.setItem("tbody", JSON.stringify(arr));
 }
-
-function op() {}
